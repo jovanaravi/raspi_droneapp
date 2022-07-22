@@ -73,9 +73,11 @@ if __name__ == '__main__':
             command_receiver = Command_recv(node_socket, drone) #separate thread for receiving commands were created
             command_receiver.start()
             while watchdog.net_status and drone.IS_ACTIVE:
-                msg = 'stil connected\r'.encode()
+                lon= drone.Get_lon()
+                lat= drone.Get_lat()
+                msg= (str(lat)+ " " +str(lon)).encode()
                 node_socket.send(msg)
-                time.sleep(10)
+                time.sleep(10) #promeni vreme na sekund, nemoj zaboraviti curko
         except Exception as e:
             logging.error(str(e), exc_info=True)
             drone.freeze() 

@@ -36,6 +36,21 @@ class Drone:
         if command == 'LEFT':
             print(command)
     
+    def Get_lon(self):
+        location = self.vehicle.location.global_frame
+        first_split= str(location).split()
+        a= first_split[0].split('=')
+        b= a[2].split(",")
+        lon = b[0]
+        return lon
+    def Get_lat(self):    
+        location = self.vehicle.location.global_frame
+        first_split= str(location).split()
+        a= first_split[0].split('=')
+        b= a[1].split(",")
+        lat= b[0]
+        return lat
+
     def freeze(self):
         logging.info('Freezing in a spot')        
 
