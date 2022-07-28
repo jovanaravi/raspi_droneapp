@@ -146,16 +146,9 @@ class Drone:
     def Go_home(self):
         logging.info('Going Home')
 
-        self.vehicle.mode = VehicleMode("GUIDED")
+        self.vehicle.mode = VehicleMode("RTL")
         
-        while True:
-            current_hight = self.vehicle.location.global_relative_frame.alt
-        
-            if current_hight >= rtl_alt * 0.95:
-                logging.info("Safe RTL Altitude reached")
-                self.vehicle.mode = VehicleMode("RTL")
-                break
-            time.sleep(1)
+        time.sleep(1)
 
     def set_velocity_body(self, vx, vy, vz):
 
