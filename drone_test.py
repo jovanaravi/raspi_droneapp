@@ -24,24 +24,19 @@ PARAM = config['drone']['param']
 
 vehicle = connect(PIXHAWK, baud= BAUD_RATE, wait_ready = True)
 
-print(" Attitude: %s" % vehicle.attitude)
-print(" Velocity: %s" % vehicle.velocity)
-print(" GPS: %s" % vehicle.gps_0)
-print(" Gimbal status: %s" % vehicle.gimbal)
-print(" Battery: %s" % vehicle.battery)
-print(" EKF OK?: %s" % vehicle.ekf_ok)
-print(" Last Heartbeat: %s" % vehicle.last_heartbeat)
-print(" Rangefinder: %s" % vehicle.rangefinder)
-print(" Rangefinder distance: %s" % vehicle.rangefinder.distance)
-print(" Rangefinder voltage: %s" % vehicle.rangefinder.voltage)
-print(" Heading: %s" % vehicle.heading)
-print(" Is Armable?: %s" % vehicle.is_armable)
-print(" System status: %s" % vehicle.system_status.state)
-print(" Groundspeed: %s" % vehicle.groundspeed)    # settable
-print(" Airspeed: %s" % vehicle.airspeed)    # settable
-print(" Mode: %s" % vehicle.mode.name)    # settable
-print(" Armed: %s" % vehicle.armed)    # settable
+vehicle.mode = VehicleMode("GUIDED")   
 
+vehicle.armed = True
+time.sleep(1)
+while not vehicle.armed:
+    vehicle.armed = True
+    time.sleep(1)
 
-print('prosloooo')
+vehicle.simple_takeoff(3)
+time.sleep(20)
+while vehicle.mode.name != "LAND":
+    vehicle.mode = VehicleMode("LAND")
+    time.sleep(1)
+
+print("Vehicle land successful")
 

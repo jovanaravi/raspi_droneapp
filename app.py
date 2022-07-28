@@ -77,7 +77,7 @@ if __name__ == '__main__':
                 lat= drone.Get_lat()
                 msg= (str(lat)+ " " +str(lon)).encode()
                 node_socket.send(msg)
-                time.sleep(10) #promeni vreme na sekund, nemoj zaboraviti curko
+                time.sleep(1) #promeni vreme na sekund, nemoj zaboraviti curko
         except Exception as e:
             logging.error(str(e), exc_info=True)
             drone.freeze() 

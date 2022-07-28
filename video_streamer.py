@@ -16,7 +16,7 @@ config = configparser.ConfigParser()
 
 
 DRONE_ID = 1
-HOST_IP = '192.168.8.107'
+HOST_IP = '192.168.8.115'
 VIDEO_PORT = 1313
 
 GRAYSCALE = 'false'.lower() == 'true'
